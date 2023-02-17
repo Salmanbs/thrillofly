@@ -23,6 +23,7 @@ import {
 } from "@material-ui/core";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
+import {locationService} from "../services/location";
 
 const airports = [
   { code: "DEL", city: "Delhi" },
@@ -44,17 +45,8 @@ const classes = [
   { id: 2, name: "Business" },
   { id: 3, name: "First Class" },
 ];
-import React, {useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
-import {locationService} from "../services/location";
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -209,8 +201,8 @@ function SourceDestinationDatePage() {
 
   return (
      <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={4}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={3}>
           <Autocomplete
             id="source"
             options={airports}
