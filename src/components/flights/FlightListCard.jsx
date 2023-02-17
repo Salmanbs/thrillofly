@@ -1,10 +1,14 @@
 import React from "react";
 
 const FlightListCard = (props) => {
-    const { fight } = props;
+    const { flight } = props;
 
     return (
-        <div>aaaa</div>
+        <div>
+            <div>{flight.source}</div>
+            <div>{flight.destination}</div>
+
+        </div>
     );
 }
 

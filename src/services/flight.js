@@ -1,4 +1,4 @@
-import { flights } from "../../dummy_data/flights";
+import { flights } from "../dummy_data/flights";
 
 class Flight {
     search(params) {

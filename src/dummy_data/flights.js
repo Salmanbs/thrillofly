@@ -8,7 +8,49 @@ export const flights = [
         oneWay: false,
         lastTicketingDate: '2023-03-15',
         numberOfBookableSeats: 7,
-        itineraries: [ [Object] ],
+        itineraries: [
+            {
+                duration: 'PT16H40M',
+                segments: [
+                    {
+                        departure: {iataCode: 'BLR', at: '2023-02-27T05:45:00'},
+                        arrival: {
+                            iataCode: 'DEL',
+                            terminal: '3',
+                            at: '2023-02-27T08:50:00'
+                        },
+                        carrierCode: 'AI',
+                        number: '804',
+                        aircraft: {code: '32N'},
+                        operating: {carrierCode: 'AI'},
+                        duration: 'PT3H5M',
+                        id: '1',
+                        numberOfStops: 0,
+                        blacklistedInEU: false
+                    },
+                    {
+                        departure: {
+                            iataCode: 'DEL',
+                            terminal: '3',
+                            at: '2023-02-27T13:05:00'
+                        },
+                        arrival: {
+                            iataCode: 'CDG',
+                            terminal: '1',
+                            at: '2023-02-27T17:55:00'
+                        },
+                        carrierCode: 'AI',
+                        number: '143',
+                        aircraft: {code: '788'},
+                        operating: {carrierCode: 'AI'},
+                        duration: 'PT9H20M',
+                        id: '2',
+                        numberOfStops: 0,
+                        blacklistedInEU: false
+                    }
+                ]
+            }
+        ],
         price: {
             currency: 'USD',
             total: '345.46',

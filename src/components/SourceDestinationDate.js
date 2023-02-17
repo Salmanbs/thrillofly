@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -8,14 +8,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from '@material-ui/pickers';
-
-const airports = [
-  { code: 'DEL', city: 'Delhi' },
-  { code: 'BOM', city: 'Mumbai' },
-  { code: 'BLR', city: 'Bangalore' },
-  { code: 'HYD', city: 'Hyderabad' },
-  { code: 'MAA', city: 'Chennai' },
-];
+import {locationService} from "../services/location";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,13 +23,52 @@ const useStyles = makeStyles((theme) => ({
 
 function SourceDestinationDatePage() {
   const classes = useStyles();
-  const [source, setSource] = React.useState(null);
-  const [destination, setDestination] = React.useState(null);
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const [flightSearchData, setFlightSearchData] = React.useState({
+    source: '',
+    destination: '',
+    departureDate: new Date(),
+    travelClass: ''
+  });
+  const [airports, setAirports] = React.useState([]);
+
+  useEffect(() => {
+    fetchAllLocations();
+  }, []);
+
+  const fetchAllLocations = () => {
+    locationService.getAllAirports().then((response) => {
+      setAirports(response);
+    });
+  }
+
+  const handleDepartureDateChange = (date) => {
+    setFlightSearchData((
+        {
+            ...flightSearchData,
+            departureDate: date
+        }
+    ));
   };
+
+  const handleSourceChange = (airport) => {
+    console.log(airport.code);
+    setFlightSearchData((
+        {
+            ...flightSearchData,
+            source: airport.code
+        }
+    ));
+  }
+
+  const handleDestinationChange = (airport) => {
+    setFlightSearchData((
+        {
+            ...flightSearchData,
+            destination: airport.code
+        }
+    ));
+  }
 
   return (
      <div className={classes.root}>
@@ -47,7 +79,7 @@ function SourceDestinationDatePage() {
             options={airports}
             getOptionLabel={(option) => option.city}
             onChange={(event, newValue) => {
-              setSource(newValue);
+              handleSourceChange(newValue);
             }}
             renderInput={(params) => (
               <TextField
@@ -64,9 +96,7 @@ function SourceDestinationDatePage() {
             id="destination"
             options={airports}
             getOptionLabel={(option) => option.city}
-            onChange={(event, newValue) => {
-              setDestination(newValue);
-            }}
+            onChange={(event, newValue) => handleDestinationChange(newValue)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -79,7 +109,6 @@ function SourceDestinationDatePage() {
         </Grid>
         <Grid item xs={12} sm={4}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          {/* <DatePicker value={selectedDate} onChange={handleDateChange} /> */}
             <KeyboardDatePicker
               disableToolbar
               variant="inline"
@@ -87,8 +116,8 @@ function SourceDestinationDatePage() {
               margin="normal"
               id="date-picker-inline"
               label="Date"
-              value={selectedDate}
-              onChange={handleDateChange}
+              value={flightSearchData.departureDate}
+              onChange={(event, newValue) => handleDepartureDateChange(newValue)}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}

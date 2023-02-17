@@ -5,11 +5,11 @@ const FlightList = (props) => {
     const { flights } = props;
 
     return (
-        <React.Fragment>
+        <div>
             {flights && flights.map((flight) => (
                 <FlightListCard flight={flight} />
             ))}
-        </React.Fragment>
+        </div>
     );
 };
 

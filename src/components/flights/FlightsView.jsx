@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import FlightList from "./FlightList";
-import {flightService} from "../services/flight";
+import {flightService} from "../../services/flight";
 import FlightFilter from "./FlightFilter";
 
 const FlightsView = (props) => {
@@ -21,7 +21,7 @@ const FlightsView = (props) => {
             travelClass,
             inventory
         }).then((response) => {
-            setAvailableFlights(response.data.flights);
+            setAvailableFlights(response);
         });
     }
 
