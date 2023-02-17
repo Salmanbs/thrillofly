@@ -1,10 +1,13 @@
-// import logo from './logo.svg';
-import './App.css';
 import SourceDestinationDatePage from './components/SourceDestinationDate';
+import React from "react";
+import FlightsView from "./components/flights/FlightsView";
 
 function App() {
   return (
-  <SourceDestinationDatePage/>
+      <React.Fragment>
+        <SourceDestinationDatePage />
+        <FlightsView />
+      </React.Fragment>
   );
 }
 
